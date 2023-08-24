@@ -31,6 +31,5 @@ export class MediasController {
     async deleteMedia(@Param("id",ParseIntPipe) id: number){
         
             await this.mediasService.deleteMedia(id);
-
     }
 }
