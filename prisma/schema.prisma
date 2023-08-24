@@ -34,7 +34,7 @@ model Publications{
   mediaId Int 
   post Posts @relation(fields: [postId], references: [id], onDelete: Restrict)
   postId Int
-  data DateTime
+  date DateTime
 
   @@map("publications")
 }
