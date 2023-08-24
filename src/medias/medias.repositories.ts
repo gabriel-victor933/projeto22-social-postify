@@ -17,4 +17,22 @@ export class MediasRepositories {
             data: {title, username}
         })
     }
+
+    getMedias(){
+        return this.prismaService.medias.findMany()
+    }
+
+    getMediaById(id: number){
+        return this.prismaService.medias.findMany({
+            where: {id}
+        })
+    }
+
+    deleteMedia(id: number){
+        return this.prismaService.medias.delete({
+            where: {
+                id
+            }
+        })
+    }
 }
