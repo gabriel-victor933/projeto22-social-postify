@@ -42,12 +42,7 @@ export class PublicationsController {
 
     @Put("/:id")
     async updatePublication(@Param("id",ParseIntPipe) id: number, @Body() body: CreatePublicationDto){
-        try {
             await this.publicationServices.updatePublication(body,id);
-        } catch(err){
-            if(err.code === "P2003") throw new NotFoundException("MediaId or PostId Not Found");
-            throw new InternalServerErrorException("Error")
-        }
     }
 
 }

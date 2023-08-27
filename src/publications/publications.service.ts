@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PublicationsRepositories } from './publications.repositories';
 import { CreatePublicationDto } from './dtos/publications.dto';
 
@@ -15,6 +15,8 @@ export class PublicationsService {
     }
 
     async getPublicationById(id: number){
+        const publication = await this.publicationRepositories.getPublicationById(id)
+        if(publication.length === 0) throw new NotFoundException("Post Not Found")
         return await this.publicationRepositories.getPublicationById(id);
     }
 

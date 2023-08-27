@@ -14,7 +14,6 @@ export class PublicationsRepositories {
     getPublication(published: boolean | void, after: Date | void) {
 
         const listWhere = []
-        console.log(typeof published)
         if(typeof published === "boolean"){
             
             if(published == true){
@@ -47,6 +46,12 @@ export class PublicationsRepositories {
             
             if(!publication) throw new NotFoundException("Publication not found")
             if(publication.date < new Date()) throw new ForbiddenException("Publication has already been posted ")
+
+            const media = await tx.medias.findUnique({where: {id: body.mediaId}})
+            if(!media) throw new NotFoundException("Media not found") 
+
+            const post = await tx.posts.findUnique({where: {id: body.postId}})
+            if(!post) throw new NotFoundException("Post not found") 
 
             await tx.publications.update({
                 where: {id},
