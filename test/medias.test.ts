@@ -5,8 +5,8 @@ import { AppModule } from '../src/app.module';
 import { PrismaModule } from '../src/prisma/prisma.module';
 import { PrismaService } from '../src/prisma/prisma.service';
 import { createMedia } from './factories/medias.factories';
-import { HttpAdapterHost, APP_FILTER  } from '@nestjs/core';
-import { PrismaClientExceptionFilter, providePrismaClientExceptionFilter } from 'nestjs-prisma';
+import { HttpAdapterHost  } from '@nestjs/core';
+import { PrismaClientExceptionFilter } from 'nestjs-prisma';
 import { createPublication } from './factories/publications.factories';
 
 

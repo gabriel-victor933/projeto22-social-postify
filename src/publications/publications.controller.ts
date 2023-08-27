@@ -1,6 +1,8 @@
-import { Body, Controller, InternalServerErrorException, NotFoundException, Post, Get, Put, Delete, Param, ParseIntPipe } from '@nestjs/common';
+import { Body, Controller, InternalServerErrorException, NotFoundException, Post, Get, Put, Delete, Param, Query, ParseIntPipe, ParseBoolPipe } from '@nestjs/common';
 import { PublicationsService } from './publications.service';
-import { CreatePublicationDto } from './dtos/publications.dto';
+import {  CreatePublicationDto, QueryDto } from './dtos/publications.dto';
+import { query } from 'express';
+import { type } from 'os';
 
 @Controller('publications')
 export class PublicationsController {
@@ -19,8 +21,13 @@ export class PublicationsController {
     }
 
     @Get()
-    async getPublications(){
-        return await this.publicationServices.getPublications()
+    async getPublications(@Query() query: QueryDto ){
+        let published: boolean | void;
+        if(query.published){
+            published = (query.published === "true") 
+        }
+        
+        return await this.publicationServices.getPublications(published,query.after)
     }   
 
     @Get("/:id")

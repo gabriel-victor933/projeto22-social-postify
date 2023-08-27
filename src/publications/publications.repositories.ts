@@ -11,8 +11,24 @@ export class PublicationsRepositories {
         return this.prismaService.publications.create({data: body})
     }
 
-    getPublication() {
-        return this.prismaService.publications.findMany()
+    getPublication(published: boolean | void, after: Date | void) {
+
+        const listWhere = []
+        console.log(typeof published)
+        if(typeof published === "boolean"){
+            
+            if(published == true){
+                listWhere.push({date: {lte: new Date()}})
+            } else {
+                listWhere.push({date: {gt: new Date()}})
+            }
+        }
+        
+        if(after){
+            listWhere.push({date: {gte: new Date(after)}})
+        }
+        
+        return this.prismaService.publications.findMany({where: {AND: listWhere}})
     }
 
     getPublicationById(id: number){

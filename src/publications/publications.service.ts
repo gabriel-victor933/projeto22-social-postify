@@ -10,8 +10,8 @@ export class PublicationsService {
         await this.publicationRepositories.createPublication(body);
     }
 
-    async getPublications(){
-        return await this.publicationRepositories.getPublication()
+    async getPublications(published: boolean | void, after: Date | void){
+        return await this.publicationRepositories.getPublication(published,after)
     }
 
     async getPublicationById(id: number){

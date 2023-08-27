@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsNumber } from "class-validator"
+import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsIn } from "class-validator"
 
 export class CreatePublicationDto {
     @IsNumber()
@@ -10,4 +10,13 @@ export class CreatePublicationDto {
     @IsDateString()
     @IsNotEmpty()
     date: Date
+}
+
+export class QueryDto {
+    @IsOptional()
+    @IsIn(["true","false"])
+    published: string
+    @IsOptional()
+    @IsDateString()
+    after: Date
 }
