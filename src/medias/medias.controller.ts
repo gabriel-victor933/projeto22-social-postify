@@ -9,7 +9,15 @@ export class MediasController {
 
     @Post()
     async createMedia(@Body() body: CreateMediaDto){
-        await this.mediasService.createMedia(body);
+
+        try {
+            await this.mediasService.createMedia(body);
+        } catch(err){
+            console.log(err);
+            console.log(err.code)
+            throw new Error("teste")
+        }
+        
     }
 
     @Put("/:id")

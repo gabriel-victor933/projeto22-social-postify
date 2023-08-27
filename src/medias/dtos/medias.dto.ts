@@ -1,10 +1,10 @@
-import { IsNotEmpty, IsString, IsUrl } from "class-validator"
+import { IsNotEmpty, IsString } from "class-validator"
 
 export class CreateMediaDto {
     @IsString()
     @IsNotEmpty()
     title: string
-    @IsUrl()
+    @IsString()
     @IsNotEmpty()
     username: string
 }
