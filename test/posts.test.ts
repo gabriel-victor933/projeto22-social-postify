@@ -40,6 +40,10 @@ describe('"/posts" integration test', () => {
         
     });
 
+    afterAll(async () => {
+      await prisma.$disconnect()
+    })
+
   it("/posts POST with invalid body should return 400", async () => {
     await request(app.getHttpServer())
     .post("/posts")
