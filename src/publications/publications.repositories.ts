@@ -30,6 +30,16 @@ export class PublicationsRepositories {
         return this.prismaService.publications.findMany({where: {AND: listWhere}})
     }
 
+    getFuturePublicationsInfos(){
+        return this.prismaService.publications.findMany({
+            where: {date: {gt: new Date()}},
+            include: {
+                post:true,
+                media: true
+            }
+        })
+    }
+
     getPublicationById(id: number){
         return this.prismaService.publications.findMany({where: {id}});
     }

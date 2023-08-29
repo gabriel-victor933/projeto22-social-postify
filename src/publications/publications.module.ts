@@ -7,6 +7,7 @@ import { PrismaModule } from '../prisma/prisma.module';
 @Module({
   imports: [PrismaModule],
   controllers: [PublicationsController],
-  providers: [PublicationsService, PublicationsRepositories]
+  providers: [PublicationsService, PublicationsRepositories],
+  exports: [PublicationsRepositories]
 })
 export class PublicationsModule {}
