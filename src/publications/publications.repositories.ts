@@ -1,14 +1,13 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePublicationDto } from './dtos/publications.dto';
-import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class PublicationsRepositories {
     constructor(private readonly prismaService: PrismaService){}
 
     createPublication(body: CreatePublicationDto){
-        return this.prismaService.publications.create({data: body})
+        return this.prismaService.publications.create({data: {...body,date: new Date(body.date)}})
     }
 
     getPublication(published: boolean | void, after: Date | void) {
@@ -32,10 +31,25 @@ export class PublicationsRepositories {
 
     getFuturePublicationsInfos(){
         return this.prismaService.publications.findMany({
-            where: {date: {gt: new Date()}},
-            include: {
-                post:true,
-                media: true
+            where: {AND: [
+                {date: {gt: new Date(Date.now())}},
+                {date: {lt: new Date(Date.now()+60000)}}
+            ]},
+            select: {
+                date: true,
+                media: {
+                    select: {
+                        title: true,
+                        username: true
+                    }
+                },
+                post: {
+                    select: {
+                        title: true,
+                        text: true,
+                        image: true
+                    }
+                }
             }
         })
     }

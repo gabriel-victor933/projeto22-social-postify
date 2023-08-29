@@ -5,11 +5,19 @@ import { PostsModule } from './posts/posts.module';
 import { MediasModule } from './medias/medias.module';
 import { PublicationsModule } from './publications/publications.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { ScheduleModule } from './schedule/schedule.module';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { MailModule } from './schedule/mail.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
-  imports: [PostsModule, MediasModule, PublicationsModule, PrismaModule, ScheduleModule, MailerModule.forRoot({
+  imports: [
+    PostsModule, 
+    MediasModule, 
+    PublicationsModule, 
+    PrismaModule, 
+    MailModule,
+    ScheduleModule.forRoot(),
+    MailerModule.forRoot({
     transport: {
       host: "smtp.mailgun.org",
       port: 587,

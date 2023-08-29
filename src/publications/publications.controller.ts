@@ -1,8 +1,6 @@
 import { Body, Controller, InternalServerErrorException, NotFoundException, Post, Get, Put, Delete, Param, Query, ParseIntPipe, ParseBoolPipe } from '@nestjs/common';
 import { PublicationsService } from './publications.service';
 import {  CreatePublicationDto, QueryDto } from './dtos/publications.dto';
-import { query } from 'express';
-import { type } from 'os';
 
 @Controller('publications')
 export class PublicationsController {
