@@ -13,12 +13,14 @@ import { createMedia } from './factories/medias.factories';
 
 describe('"/publications" integration test', () => {
   let app: INestApplication;
-  let prisma: PrismaService
+  let prisma: PrismaService = new PrismaService()
 
     beforeEach(async () => {
         const moduleFixture: TestingModule = await Test.createTestingModule({
-            imports: [AppModule, PrismaModule],
-        }).compile();
+            imports: [AppModule],
+        }).overrideProvider(PrismaService)
+        .useValue(prisma)
+        .compile();
 
         app = moduleFixture.createNestApplication();
         
