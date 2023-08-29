@@ -10,12 +10,12 @@ export class ScheduleService  {
     constructor(private readonly publicationsRepositories: PublicationsRepositories,
         private readonly mailService: MailService){}
    
-    @Cron("59 * * * * *",{
+    @Cron("* * * * * *",{
         timeZone: "America/Sao_Paulo"
     })
     async handleCron(){
         const publications = await this.publicationsRepositories.getFuturePublicationsInfos()
-        
+        console.log(`${process.env.LOGIN} `)
         if(publications.length !== 0){
             console.log("emails")
             console.log(publications)

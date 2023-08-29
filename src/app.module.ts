@@ -22,8 +22,8 @@ import { ScheduleModule } from '@nestjs/schedule';
       host: "smtp.mailgun.org",
       port: 587,
       auth: {
-        user: "postmaster@sandbox076fdffd73244aff8cf71fc4516df4bd.mailgun.org",
-        pass: "5aad1845f67ce37fb323d85f07913dd0-451410ff-ed264dd9"
+        user: process.env.LOGIN,
+        pass: process.env.PASSWORD
       }
     },
       
